@@ -1,0 +1,66 @@
+account : flerat / Git2008 / f77
+
+Questions
+- How switch between repositories - just change directory ?
+				  - try with Mytest and hello-world
+- Push sl4a crypt
+
+git status	- Current dir is git ? list of files not committed
+
+1) install
+sudo apt-get install git
+
+2) Configure variables / account
+git-config --global user.name "flerat"
+git-config --global user.email "franck.lerat77@gmail.com"
+
+3) generate ssh public/private key and copy to github account
+ssh -keygen -t rsa -b 4096 -C "franck.lera77@gmail.com"
+
+4) clone repository
+git clone https://github.com/flerat/Mytest.git
+
+can also use syntax
+git clone username@host:/path/to/repository
+
+5) edit local copy
+
+6) save to local / pending commit locally
+
+7) commit locally
+
+6) pull
+
+6) push
+
+
+command list
+------------
+git init	- add new file
+git add		- add file to local save in progress
+git commit	- commit locally
+
+local is 3 trees
+- working directory	
+	-> add
+	- index (stage)
+		-> commit
+		- head (local commit)
+			-> git push origin master (push all changes to remote)
+
+- git pull	- get latest changes from others
+
+- branches
+	------------ master -------------
+	+ branch------------------------- merge
+
+git checkout -b new-feature
+git checkout master		-- switch back to master
+
+git push origin <branch>	-- push branch to make it available to other
+
+git merge <branch>		-- merge with your active branch
+git diff <source> <target>	-- preview changes between 2 branches
+
+Tagging - for releases
+Log	- to review history of changes

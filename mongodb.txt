@@ -1,0 +1,187 @@
+- What is sharding ?
+
+##############################
+Usefull queries
+##############################
+db.help()		-- list of commands	- ex : db.stats()
+use db
+show dbs
+show collections
+db.movie.find().pretty()
+db.movie.find({"name":"essai"}).pretty()
+
+
+######################
+JSON
+#####################
+{ key:value		-> scalar , {object} , [list of scala or object]}
+db.movie.insert({"name":"essai",comment:[{"cmt":"hello","age":20}, {"cmt":"hello","age":11}]})
+
+##########################
+Install
+##########################
+sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv 0C49F3730359A14518585931BC711F9BA15703C6
+echo "deb [ arch=amd64,arm64 ] http://repo.mongodb.org/apt/ubuntu xenial/mongodb-org/3.4 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-3.4.list
+sudo apt-get update
+sudo apt-get install -y mongodb-org
+sudo service mongod start
+cd /var/log/mongodb
+sudo service mongod stop
+sodu service mongod restart
+
+stop : ctrl C in console
+check status : sudo service mongod status
+
+#############################
+Uninstall
+#############################
+sudo apt-get purge mongodb-org*
+
+############################
+Mongo shell
+############################
+- start mongod process 
+$ mongo
+
+db		-- list databases
+use test	-- change to test db
+
+###############################
+Concept
+###############################
+- DB - physical container for collections - has files on filesystem
+- Mongo server has n databases
+- Collection = group of mongo documents - same as a table who could have row with different fields
+- Document - set of key value pair - same as a row
+- Documents follow JSON syntax
+
+{
+_id: ObjectId(7df78ad8902c)
+title: 'MongoDB Overview',
+...
+comments: [
+		{
+		user:'user1',
+		..
+		},
+		{
+		user:'user2',
+		...
+		}
+	]
+}
+
+# Documents have no schema
+# Index on any attribute , auto sharding , fast in place update
+
+################################
+Mongodb data modelling
+################################
+- Combine objects into one document if you will use them together. Otherwise
+separate them (but make sure there should not be need of joins).
+- Duplicate the data (but limited) because disk space is cheap as compare to compute
+time.
+- Do joins while write, not on read.
+- Optimize your schema for most frequent use cases.
+- Do complex aggregation in the schema.
+
+Equivalent RDBMS / Mongo
+------------------------
+Post	-> Tags
+	-> Comments
+
+{
+_id: POST_ID
+title: TITLE_OF_POST,
+..
+tags: [TAG1, TAG2, TAG3],
+comments: [
+	{
+	user:'COMMENT_BY',
+	..
+	},
+	{
+	user:'COMMENT_BY',
+	..
+-> Dont need join - inner tables are embedded
+
+##########################
+Basic commands
+#########################
+db	- current db
+use db	- change - create if dont exist
+show dbs
+db.stat()
+db.movie.insert({"name":"tutorials point"})	-- Insert document into collection "movie"
+db.dropDatabase()
+db.createCollection(name, options)		-- create collection
+						-- options - auto index , size , max..
+- db.createCollection("mycollection")
+- show collections
+- db.mycollection.drop()
+- can insert bulk document in single insert()
+- db.post.insert([
+	{doc1...},
+	{doc2..} 
+	]
+- The 2 docs can have different structures
+- Can see available methods : db.movie.help()
+- db.movie.find() - list all documents of the collection (_id is autoallocated if not specified)
+- db.movie.find().pretty()	- in a formatted array
+
+####################################
+Find commands and matching
+####################################
+db.movie.find({"name":"john"}).pretty()
+db.movie.find({"name":{$ne:"john"}}).pretty()				- see gt,gte , lt , lte
+db.mycol.find({key1:value1, key2:value2}).pretty()			-- And
+db.mycol.find( { $or: [ {key1: value1}, {key2:value2} ] }).pretty()	-- Or
+
+##############################
+Update, Delete , Save / replace document
+##############################
+db.COLLECTION_NAME.update(SELECTIOIN_CRITERIA, UPDATED_DATA)
+
+################################
+Projections , Limit
+################################
+- Select only subset of data - not all the document
+- db.COLLECTION_NAME.find({},{KEY:1})	0 : hide the field , 1: show (default)
+- db.COLLECTION_NAME.find().limit(NUMBER)	-- limit nb of documents returned 
+- Can sort using a key
+- Can create index on a field
+
+Ex Python :
+from pymongo import MongoClient
+import json
+
+client=MongoClient('localhost',27017)
+db=client['newdb']
+collection=db.movie
+mydoc=collection.find_one({},{'_id':0})
+print(mydoc)
+print(type(mydoc))
+json.dumps(mydoc)
+
+###################################
+Aggregation
+###################################
+
+####################################
+Replication
+####################################
+
+###################################
+Sharding
+###################################
+- Storing data across multiple machines
+
+####################################
+Relationships
+####################################
+
+#####################################
+Access from Java , PHP , Python
+#####################################
+	
+

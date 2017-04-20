@@ -1,0 +1,13 @@
+1) Using regular expressions
+----------------------------
+import re
+	-> findall , search ...
+
+2) Generating XML file
+----------------------
+from lxml import etree
+
+3) Create json file
+-------------------
+
+

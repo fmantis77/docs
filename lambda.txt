@@ -1,0 +1,23 @@
+# See iter , yield , map , reduce , filter
+
+####################################################
+# Example 1 - list of functions
+####################################################
+
+oper=[lambda n: n,lambda n:n*n,lambda n:n*n*n]
+
+oper[1](4)
+16
+oper[0](4)
+4
+>>> 
+
+#######################################################
+# Functional programming - passing function to function
+#######################################################
+mult3 = filter(lambda x: x % 3 == 0, [1, 2, 3, 4, 5, 6, 7, 8, 9])
+# could be done by declaring function before and passing - easier with lambda embedded
+
+
+>>> square = lambda x: x**2
+>>> [square(s) for x in a]

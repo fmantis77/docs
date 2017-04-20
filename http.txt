@@ -1,0 +1,57 @@
+- request / response protocol between client / server over the web
+- other internet protocols : FTP , SMTP , POP...
+- is a pull protocol - client pull data from server (as opposed to push protocol)
+- stateless protocol - current request has nothing to do with previous request
+- URL in browser is transformed into a request message sent to http servier
+- ex : http://host:port/path/file
+	-> GET URL HTTP/1.1
+	   Host: host:port
+	   ...
+	<- HTTP/1.1 2000 OK
+	   ...
+- URL format : protocol://hostname:port/path
+other example : ftp://... , mailto:user@hotmail.com , news: , telnet:
+- Example of response:
+	HTTP:/1.1 200 OK
+	Date: ...
+	Server: ..
+	Last-Modified:..
+	..
+	Content-Type: text/html		(Mime type)
+	<html><body>....</html>
+	
+- Server can be Apache HTTP or Tomcat or other
+- Message format :
+	Request : Header , blank line , body (optional - example GET)
+
+	request line : GET /test.htnl HTTP/1.1
+	request header : Host: , Connection: , etc ..
+
+- Sample using telnet :
+telnet localhost 80
+GET /index.html HTTP/1.0
+
+- then response :
+HTTP/1.1 200 OK
+Date: Thu, 13 Apr 2017 08:20:16 GMT
+Server: Apache/2.4.18 (Ubuntu)
+Vary: Accept-Encoding
+Content-Length: 343
+Connection: close
+Content-Type: text/html; charset=UTF-8
+<body>
+
+- Python3 HTTP request :
+import http.client
+conn=http.client.HTTPConnection('flerat.com')
+conn.request("GET","/")
+r1 = conn.getresponse()
+print(r1.status,r1.reason)
+data1 = r1.read()
+print(data1)
+
+
+
+- HTTPS request
+- Calling a cgi :
+GET /xml/crud/gettest.cgi?fname=Barry&lname=Wom HTTP/1.1

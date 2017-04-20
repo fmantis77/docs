@@ -1,0 +1,99 @@
+import numpy as np
+import pandas as pd
+import sys
+
+####################################
+# Numpy - Arrays - Inherit from list
+#####################################
+- n dimension list with special functions
+
+ar1=np.array([1,1,1])
+ar2=np.array([2,2,2])
+ar1+ar2
+
+data1=[1,2,3,4]
+arr1=np.array(data1);		print (arr1)
+arr2=np.array([[1,2],[3,4]]);	print (arr2)
+arr3=np.zeros( (3,3) );		print (arr3)
+arr4=np.array( [1,2,3] , dtype=np.float64)
+
+# Provide more functions than list : add , nultiply.. , slice , index
+names=np.array( ['bob','tom','jo','bill'] )
+vals=np.array( [1,3,2,5] )
+print (names=='bob')		# true , false , false , false
+print (vals[names=='bob'])	# return [1] - use previous array as boolean to extract from 2nd
+
+##################
+# Pandas - Series
+##################
+- One dimensional array - with an index
+sr1=pd.Series([2,5,10,3,14,7,3])
+sr1[sr1>sr1.median()]
+sr1[2:].median()
+sr2=pd.Series([3,6,1,7],index=['a','b','c','d']); print(sr2['c':])
+sr3=pd.Series({"john":21,"bill":11})
+
+obj=pd.Series([4,5,-5,3])	# Case sensitive
+print (obj)			# print serie - 1st column - index - default 0,1,2,3..
+print (obj.index,obj.values)
+obj=pd.Series([10,20,30],index=['a','b','c'])
+print (obj['b'])		# 20
+print (obj[obj>10])
+# Can create Serie from a dictionnary = key = index
+
+#######################
+# Pandas - Data Frames	
+#######################
+- 2 dimension , labeled data structure- like spreadsheet or SQL table
+- specify - column names , and index for each row
+
+# ex : row = state , column = year , cell = population
+data = { 'state': ['ohio','nevada','ohio','nevada'], 'year':[2000,2000,2002,2002], 'pop':[1.2,2.4,1.5,2.8] }
+frame=pd.DataFrame(data,columns=['state','year','pop'],index=['one','two','three','four'])
+print(frame)
+print(frame.ix['two'])
+print(frame[frame.state=='nevada'])
+print(frame[frame.year==2000])
+
+# Parallel with SQL - column names state , year , pop - then n rows
+# Column names are specified as dictionnary keys - then list column - all values
+
+##### Apply function to a frame
+f= lambda x: x.max()
+#print(frame.apply(f,axis=2))
+
+###########################
+# pandas - joins
+###########################
+data={
+	'id_imnt': [1,2,3,4],
+	'nm_imnt': ['vodafone','jpm','ibm','nestle'],
+	'id_ccy': ['GBP','USD','USD','EUR'] }
+instrument=pd.DataFrame(data,columns=['id_imnt','nm_imnt','id_ccy'])
+
+data={
+	'id_prtf': [100,200],
+	'nm_prtf': ['portfolio1','portfolio2'] }
+portfolio=pd.DataFrame(data,columns=['id_prtf','nm_prtf'])
+
+data={
+	'id_posn': [1,2,3,4,5,6],
+	'id_imnt': [1,1,2,2,3,3],
+	'id_prtf': [100,200,100,200,100,200],
+	'am_posn': [2000,1000,-10,200,10000,-300] }
+
+position=pd.DataFrame(data,columns=['id_posn','id_imnt','id_prtf','am_posn'])
+
+res1=pd.merge( \
+	pd.merge(position,instrument,on='id_imnt',how='outer'), \
+	portfolio,on='id_prtf',how='outer')
+
+res2=pd.merge( \
+	pd.merge(position,instrument,on='id_imnt',how='inner'), \
+	portfolio,on='id_prtf',how='inner')
+
+print  (res1)
+print  (res2)
+
+
+

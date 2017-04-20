@@ -1,0 +1,53 @@
+iaas	- provide low level infra - compute , storage , network..
+paas	- provide OS ...
+saas	- provide app (mysql , cassandra , apache..)
+
+Services
+--------
+- S3 first service created - now object can be > Tb , can have termination date
+- Can be used to host website (objects are the web pages)
+
+- SQS - to pass msg between aws programs
+
+- EC2 - elastic cloud compute
+
+- Cheap HW with redundant copies
+- Lower latency if all services are together in AWS
+- All interaction with AWS is via API - SOAP or REST
+
+- SOAP more rich but cumbersome - use XML
+- REST - lighter
+http://search.examplecompany.com/CompanyDirectory/EmployeeInfo?empname=BernardGolden
+	-> call service EmployeeInfo with parameter
+	-> use POST (insert) or PUT (update)
+	-> use JSON for more complex query
+
+## Example of service call - Running an instance
+https://ec2.amazonaws.com/?Action=RunInstances
+&ImageId=ami-60a54009
+&MaxCount=3
+&MinCount=1
+&Placement.AvailabilityZone=us-east-1b
+&Monitoring.Enabled=true
+&AUTHPARAMS
+
+AWS management console
+----------------------
+- setup amazon login
+- need card details and phone - can put limit on billing - should be free
+
+Storage
+-------
+- S3 - collection of unstructured objects
+- EBS - Elastic block storage - data volumes to attach to VMs
+- Glacier - offline storage
+
+- EBS - used for FS , databases...
+      - Provisionned using EC2
+
+Setting An Amazon Machine Image
+----------------------------
+- Will need EC2 , EBS
+- Will need configure OS , middleware , packages...
+- Bitnami - offer range of pre-built AMI
+	- Filter on public images , EBS images , Ubuntu

@@ -1,0 +1,157 @@
+Todo
+#############################
+- reserve instance and leave running all time - fixed cost ?
+- S3 from img.flerat.com
+		- CNAME with link to htpps - no such bucket
+		- hostedzone with alias - server not found
+- Check if domain name gives access to preffix
+
+1) Creation S3 / EC2
+--------------------
+EC2 instance name : FL EC2
+instance id : i-074e3dcc5ef83f41a
+
+EC2 / AMI , EBS
+
+- create EC2
+	- select free EMI image
+
+- during launch - generate ssh key (instance.pem)
+- ssh connection :
+
+ssh -i ~/.ssh/FLUK.pem ec2-user@ec2-52-56-59-187.eu-west-2.compute.amazonaws.com
+
+samew syntax for sftp
+
+ec2-52-56-59-187.eu-west-2.compute.amazonaws.com
+
+2) Main commands
+----------------
+- refresh all packages
+sudo yum update -y
+
+3) Install Lamp
+---------------
+sudo yum install -y httpd24 php56 mysql55-server php56-mysqlnd
+sudo service httpd start
+sudo chkconfig httpd on		# Start at every boot
+
+-> test connecting instance with browser (need allow http traffic in)
+
+sudo groupadd www
+
+sudo usermod -a -G www ec2-user
+
+logout/login
+groups	-> verify added
+
+sudo chown -R root:www /var/www
+
+[ec2-user@ip-172-31-3-125 ~]$ sudo chown -R root:www /var/www
+[ec2-user@ip-172-31-3-125 ~]$ sudo chmod 2775 /var/www
+[ec2-user@ip-172-31-3-125 ~]$ find /var/www -type d -exec sudo chmod 2775 {} \;
+[ec2-user@ip-172-31-3-125 ~]$ find /var/www -type f -exec sudo chmod 0664 {} \;
+
+# testing php install
+[ec2-user@ip-172-31-3-125 ~]$ echo "<?php phpinfo(); ?>" > /var/www/html/phpinfo.php
+
+then go browser
+URL/phpinfo.php
+
+#####################
+mysql
+#####################
+   13  sudo service mysqld start
+   15  sudo chkconfig mysqld on
+
+
+see how perform mysql secure installation	-> allow to set root password
+sudo mysql_secure_installation
+
+   18  sudo yum-config-manager --enable epel
+   20  sudo yum install -y phpMyAdmin
+
+
+#############################
+access phpmyadmin - allow mysql admin tools
+
+sudo vi /etc/httpd/conf.d/phpMyAdmin.conf	<add local IP from user accessing>
+
+<URL>/phpmyadmin
+
+##############################
+# Network 
+##############################
+Internal address is internal VPC (Private)
+Public address is the elastic IP
+
+- record domain in route53
+- create record set type (A) to redirect traffic to EC2 IP address
+- can create other prefix with S3 for example
+	S3.flerat.com
+
+- add CNAME	www	-> flerat.com
+
+###########################
+GIT
+###########################
+
+- Install Git
+(Use for deployment - not sftp)
+
+sudo yum install git
+
+#################################
+Configure S3 for EC2
+#################################
+Can mount S3 FS with s3fs git package
+
+S3 are key pair value objects
+objects have URL :
+https://s3.eu-west-2.amazonaws.com/flerats3london/20161210_094146.jpg
+https://s3.eu-west-2.amazonaws.com/flerats3london
+Can have static website hosting
+
+bucket name : flerats3london
+
+S3 website : flerats3london.s3-website.eu-west-2.amazonaws.com
+
+	     img.flerat.com.s3-website.eu-west-2.amazonaws.com
+
+- Can upload index.html file to S3 and enable static website
+URL :
+Can redirect Route 53 traffic to this static website
+-> img.flerat.com	- will CNAME
+
+S3 bucket name must be same name as domain ex - img.flerat.com
+
+
+####################################
+S3 Permissions
+####################################
+Managed by policies
+Example :
+
+{
+	"Version": "2012-10-17",
+	"Statement": [
+		{
+			"Sid": "AddPerm",
+			"Effect": "Allow",
+			"Principal": "*",
+			"Action": "s3:GetObject",
+			"Resource": "arn:aws:s3:::flerats3london/*"
+		},
+		{
+			"Sid": "AddPerm",
+			"Effect": "Allow",
+			"Principal": "*",
+			"Action": "s3:ListBucket",
+			"Resource": "arn:aws:s3:::flerats3london"
+		}
+	]
+}
+/* return in xml format - will need parsing via JS - see sample in github */
+
+
+

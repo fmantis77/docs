@@ -1,0 +1,212 @@
+- Directories :
+- Devices and partitions
+- Startup
+
+###########################################
+# BASICS
+###########################################
+arch
+unmame -a
+
+########################
+Usefull commands
+########################
+https://blog.miguelgrinberg.com/post/designing-a-restful-api-with-python-and-flask
+
+#######################################
+APT
+######################################
+sodu apt-get clean	- clean local registry - need run update after
+sudo apt-get update
+
+sudo apt-get remove <package> && sudo apt-get autoremove
+
+sudo apt-get install --reinstall python-minimal python-lockfile
+
+sudo apt-get update		-- refresh all versions of modules
+apt-cache show python		-- show module
+
+finding package :
+apt-cache search php- | less
+
+apt-cache show package_name
+
+apt list --installed	- list packages
+
+#######################################
+Devices
+#######################################
+sudo fdisk -l
+df -h				free space
+
+tree - tree view on directories
+hdf5	- for big file - only limited by system
+
+-- See all disks , See all partitions , format
+fdisk -l	- see all devices and partitions
+		- sda = HD devices
+		- sdb = usb or external drive
+
+df -T		- See all mounted partitions
+/etc/fstab	- default mounts on start
+cfdisk	<device>	- Create partition table on device (gpt = big device , otherwise dos)
+mkfs.ext4 <device name>
+mount
+
+####################################
+# Start / stop / boot sequence
+####################################
+/etc/rc.local	- last file run as multi user boot - can add commands
+	-> rfkill block bluetooth
+
+sudo shutdown -r now		or sudo reboot
+sudo shutdown -h now		or sudo halt
+
+grub - dual boot page
+/etc/default/grub	- set timer to -1 , then run sudo update-grub
+
+init 0	shutdown
+init 1	mono user / maintenance
+2-6	depend list of services to start (see rc directories)
+
+/etc/init.d		--> put all apps here to startup
+
+running program at startup
+sudo mv /filename /etc/init.d/
+sudo chmod +x /etc/init.d/filename 
+sudo update-rc.d filename defaults
+
+######################################
+# Logs and errorfiles
+######################################
+/var/log/*
+/var/crash/*	- remove all to avoid constant error msg
+sudo dmesg
+
+###################################
+Users & Groups
+##################################
+
+sudo passwd root	-- set root password
+
+add user
+# useradd new-user -d /home/new-user
+# passwd new-user
+# chown /home/new-user new-user
+
+- see /etc/password
+
+######################################
+Bash
+#########################################
+
+in .bashrc	export PS1="\`pwd\` $ "
+history
+alias h='history'
+
+
+free space
+df -h
+
+adding external drive / mounting
+
+###################################
+Network
+###################################
+
+-- Check tcp ports used
+netstat -atn
+
+
+-- printer
+in file - cnijfilter-mg2400series-4.00-1-deb
+./install.sh
+
+mysql .... << !
+
+..
+..
+!
+
+#########################################
+Archives
+#########################################
+
+-- Create / extract archives
+tar cvf <file.tar> list files
+tar xvf...
+
+-- find
+find . -name '''' -print
+
+-- link 
+hardlink
+-s	symbolic link
+		hardlink - file point to same inode (add pointer of the inode)
+		softlink - point to file
+		-> better to use softlink otherwise never delete
+
+
+#####################
+config ssh
+#####################
+.ssh/hosts.allow
+/etc/hosts
+service ssh restart
+
+############################
+Firewall
+############################
+ufw status
+sudo ufw app list	-- check firewall ubuntu
+sudo ufw app info "Apache Full"
+sudo ufw allow in "Apache Full"
+
+###########################
+Daemons and Services
+############################
+sudo service apache2 status
+sudo service apache2 restart
+
+sudo service --status-all
+
+Systemd uses “units,” which can be services (.service), mount points (.mount), devices (.device), or sockets (.socket). The same systemctl command manages all these types of units.
+
+To view all available unit files on your system:
+
+    systemctl list-unit-files
+
+To list all running units:
+
+    systemctl list-unit
+
+###########################
+Processes & Jobs
+###########################
+ctrl Z
+bg %1
+jobs
+
+##########################
+Links
+##########################
+ln
+update-alternatives --display java
+(set default , can set priority , can switch)
+-- Ex - setup different python versions and switch between them
+
+#####################
+Packages
+####################
+__init__.py	- to initialize a package
+
+main.py			import app
+app	/ __init__.py
+
+http://mikegrouchy.com/blog/2012/05/be-pythonic-__init__py.html
+
+
+
+
+
+

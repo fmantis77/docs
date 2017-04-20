@@ -1,0 +1,56 @@
+sudo vi /etc/apache2/sites-enabled/000-default.conf
+
+<VirtualHost *:80>
+    <Directory /var/www/test>
+        Options +ExecCGI
+        DirectoryIndex index.py                 -- review order html , php , py
+    </Directory>
+    AddHandler cgi-script .py
+...
+DocumentRoot /var/www/test
+...
+
+# Start all
+sudo service apache2 restart
+
+check status :
+sudo systemctl status apache2
+
+-- Changing port number
+# If you just change the port or add more ports here, you will likely also
+# have to change the VirtualHost statement in
+# /etc/apache2/sites-enabled/000-default.conf
+
+/etc/apache2/apache2.conf
+
+Listen 80
+
+------ Config DocumentRoot DocumentIndex --- in /etc/apache2/apache.conf
+DocumentRoot - where start / find all doc
+DocumentIndex - List of page to find on startup , by priority
+
+----- Configure php inside html -----
+in mods-enabled --> php*.conf
+
+<FilesMatch ".+\.html$">
+    SetHandler application/x-httpd-php
+</FilesMatch>
+
+
+---- setu python chi
+1) enable cgi
+sudo a2enmod cgi
+
+2) specify location of cgi files
+<Directory .....>
+ Options ExecCGI
+ SetHandler cgi-script
+</Directory>
+
+3) Allow .py files to be executed as scripts in a particular folder --> include script in html
+<Directory ..../public_html ..>
+  Options +ExecCGI
+  AddHandler cgi-script .py
+</Directory>
+
+

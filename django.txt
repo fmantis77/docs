@@ -1,0 +1,35 @@
+- python web framework
+- Support MVC pattern (model view controller)
+	- Model - responsible for data
+	- View  - responsible for the display
+	- Controller - control interaction between model and view
+		-> isolate logic from user display
+		Event (such as UI)	-> controler	-> View		-> Model (data/logic)
+- Django using MVT pattern
+	- Deals with controler itself , use a template for config (html + django template language)
+- test install :
+	pip freeze | grep Django
+- built in webserver for testing - production will need apache or nginx
+	-> apache will then serve django applications
+		- apache will be web server - interacting with django / python
+		-> see apache config http.conf
+
+#######################
+Starting
+#######################
+django-admin startproject myproject
+cd myproject
+	python manage.py help	-- list of admin commands available
+settings.py
+	- list databases (default = sqlite3)
+	- can add mongo
+start the server
+	- python manage.py runserver
+start connected application
+	- python manage.py startapp myapp
+	- add in settings.py INSTALLED_APP
+
+####################
+Python
+###################
+import django

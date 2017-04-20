@@ -1,0 +1,49 @@
+rlogin user@host
+
+Pourtant je n'ai rien vu de spécial dans ~/.ssh/hosts.allow et hosts.deny.
+De plus à partir d'un autre ordi je ne peux pas accéder ni à mon serveur ni à mon premier ordi, j'ai toujours cette réponse.
+Seule la connexion à localhost fonctionne.
+Et sur chacun des ordis, ufw a intégré le port 22 comme autoris
+
+
+sudo ufw app list       -- check firewall ubuntu
+sudo ufw app info "Apache Full"
+sudo ufw allow in "Apache Full"
+
+ifconfig -a
+
+
+ufw allow 22		- or reject		22 = ssh
+
+~/.ssh/host.allow
+
+
+/home/franck/documents $ sudo arp-scan --interface=wlo1 192.168.1.0/24
+Interface: wlo1, datalink type: EN10MB (Ethernet)
+Starting arp-scan 1.8.1 with 256 hosts (http://www.nta-monitor.com/tools/arp-scan/)
+192.168.1.1	d0:84:b0:79:56:7e	(Unknown)
+192.168.1.46	44:8a:5b:9e:1c:aa	(Unknown)
+
+2 packets received by filter, 0 packets dropped by kernel
+Ending arp-scan 1.8.1: 256 hosts scanned in 1.365 seconds (187.55 hosts/sec). 2 responded
+
+nslookup ip
+
+##########################
+ clear DNS cache
+##########################
+/etc/init.d/named restart
+
+/etc/init.d/nscd restart
+
+######################
+Redirect traffix to another URL
+#######################
+
+specify website directory :
+DocumentRoot "/var/www/html/flerat-website"
+
+<Directory />
+   Redirect permanent / http://git.example.com/git/
+   ...
+</Directory>

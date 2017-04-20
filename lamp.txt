@@ -1,0 +1,52 @@
+sudo apache restart
+
+source located in '/var/www/test/index.py'
+
+config site :
+/etc/apache2/sites-enabled/000-default.conf
+
+install steps :
+---------------
+# use python 3 as default
+sudo rm /usr/bin/python
+sudo ln -s /usr/bin/python3 /usr/bin/python
+
+# install PIP - python installer
+sudo apt-get update
+sudo apt-get install python3-pip
+
+# install mysql
+sudo apt-get install mysql-server
+mysql_secure_installation
+sudo pip3 install pymysql
+
+# install apache
+sudo apt-get install apache2
+sudo mkdir /var/www/test
+sudo a2dismod mpm_event		# register python with apache
+sudo a2enmod mpm_prefork cgi	# give permissions to run script
+
+# configure apache
+sudo nano /etc/apache2/sites-enabled/000-default.conf
+
+<VirtualHost *:80>
+    <Directory /var/www/test>
+        Options +ExecCGI
+        DirectoryIndex index.py			-- review order html , php , py
+    </Directory>
+    AddHandler cgi-script .py
+...
+DocumentRoot /var/www/test
+...
+
+# install PHP
+sudo apt-get install php libapache2-mod-php php-mcrypt php-mysql
+
+# Start all
+sudo service apache2 restart
+
+check status :
+sudo systemctl status apache2
+
+
+-- See example mysql tables and python cgi script

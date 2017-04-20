@@ -1,0 +1,34 @@
+mysql -u root -p
+
+- Checking current disk space ?
+- Adding additional disk space
+
+- lst databases
+show databases;
+show tables;
+describe <table>;
+
+use <database>;
+
+- disk space
+SELECT pg_database_size('named_db');
+SELECT pg_size_pretty(pg_database_size('named_db'));
+
+- list tables :
+
+config :
+/etc/mysql/mysql.cnf
+
+data directory :
+/var/lib/mysql		- datafile : ibdata1
+
+-- Connecting
+servername is host -> localhost
+
+###########################
+Adding user
+###########################
+CREATE USER 'newuser'@'localhost' IDENTIFIED BY 'password';
+GRANT ALL PRIVILEGES ON * . * TO 'newuser'@'localhost';
+
+

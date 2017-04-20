@@ -1,0 +1,136 @@
+# todo		- how print int or float , references , n classes
+
+# spring - replace beans
+# java server pages
+# multiple classes , ant , maven , packages
+# jenkins , reference github
+# how to print int , float
+# assign a - b : reference or value - see python
+# f(a) - reference or value ?
+# see a=1 ; b=a -- print see python and java , try del , try composite type , how pass reference to function
+# struts - java web framework
+# review difference with Python - variable pointers
+
+	python	a=1	-> a is a reference to object 1
+		b=a	-> 2 references
+
+###############################
+Sample program
+###############################
+
+
+######################
+# Basics
+######################
+- programs are compiled to be run by a virtual machine (jre)
+- Compiled program can be run on any platform - jre understand same bytecode
+- javac test.java	- produce test.class
+- test.java must contain class test()
+- run test.class by calling the jre : java test
+- java 7 is jre 1.7	-> java -version
+
+
+######################
+# Eclipse
+######################
+- In package explorer , in src
+	- New class
+- To compile / run - right click on the class - run as - Java console
+
+#####################
+Basics
+#####################
+2 types
+	- applets	- shipped with html as .class and run with a plugin on client
+				use <applet .class> tag 
+	- application	- self contained
+
+- Compiled	- .class - binary designed to run on any machine pending is has virtual machine running
+
+###################
+# Variable
+###################
+int i=0;	// Comments
+int a,b,c;
+int a=1,b=2;
+
+/* in C declaration separate from definition - mem allocation - in Java same step */
+
+/*
+	Other comments
+*/
+String a="hello";
+String b; b=new String("hello");
+
+// Conversion	- narrow to wide - can implicit , wide to narrow - need to force
+int a; float b=(float) 1.23; a=(int) b)
+
+
+# Arrays
+int[] i = {1,2,3};
+String[] args;				/* Case sensitive 'S' as this is a class */
+
+# Constants
+final String a="constant";
+
+- Change change type implicitly or explicit (casting)	
+	a = (int) b;
+
+#################################
+First application
+################################
+hello.java
+	must contain class 'hello' - which has main method
+	compile - generate .class
+	java hello.class
+
+public class hello {
+public static void main(string[] args) {
+        System.out.println("Hello");
+                        }
+                }
+
+
+########################
+# Statements
+########################
+if ( (i==1) || (j==1) ) {
+	... }
+
+switch (a) {
+	case 1: ... break;
+	case 2: ... break;
+	default: ... break; }
+
+while (i<10) { .... } ; do {....} while (...)
+for (count=0;count<10;count++) { ... }
+
+######################
+# Method
+######################
+Has signature - name , list params / types , return value
+
+
+
+
+###################
+# Class new() , extends..)
+###################
+
+###################
+# Packages
+###################
+
+##################
+# multi threading
+##################
+synchronised(a) {....}	// hold lock on a for duration of the statement
+
+#################
+# Exception
+#################
+- Can throw existing one , or create new one
+- Must have a handler
+
+try {...} catch ... catch... finally {...}
+

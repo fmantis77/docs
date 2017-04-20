@@ -1,0 +1,166 @@
+- OO + functional language
+- Compiled to run on VM - but more productive than Java
+- Strongly typed
+- VM - emulate a common virtual machine - hosted on any HW - with CPU , virtual memory..
+- classes extended by subclasses. mixin-based composition to replace multiple inheritance
+- functional programming - every function is an object
+--> anonymous function , currying function , nested etc..
+- Can execute java code , java classes from JDK
+- DSL - domain specific language support
+- Traits
+- Closures
+- exist many scala web frameworks - Lift , Play , Bowler
+
+- Closure - A closure is a function, whose return value depends on the value of one or
+more variables declared outside this function.
+- Traits - A trait encapsulates method and field definitions, which can then be reused
+by mixing them into classes. Traits are used to define object types by specifying the
+signature of the supported methods.
+- Can start interactive console
+- Hello.scala
+
+object Hello {
+def main(args: Array[String]) { println("Hello, world!") }
+}
+
+$ scalac Hello.scala
+$ scala Hello
+
+#################
+Example 
+################
+Object Demo {
+	def main (args : Array[String]) { }
+
+- val numlist = List(1,2,3,4,5)
+- for (i <- numlist) { println(i); }
+
+########################
+Naming convention
+########################
+class MyFirstScalaClass
+def myMethodName()
+
+/* Comments */
+- Statement ended by ';' or newline
+
+###################
+Variables
+###################
+var myVar : String = "test"	/* Muttable */
+val myVal : String = "test"	/* Immuttable */
+- Can infer the type : var myVar = 10
+- Can multiple assign : var (var1 , var2) = Pair(1,2)
+- scope : Field of object , method param , local to method
+
+######################
+Class and objects
+######################
+import java.io._
+class Point(val xc: Int, val yc: Int) {
+	var x: Int = xc
+	var y: Int = yc
+	def move(dx: Int, dy: Int) {
+		x = x + dx
+		y = y + dy
+		println ("Point x location : " + x);
+		println ("Point y location : " + y);
+		}
+}
+object Demo {
+def main(args: Array[String]) {
+	val pt = new Point(10, 20);
+	// Move to a new location
+	pt.move(10, 10);
+	}
+-- Save to Demo.java (name of object)
+
+######################
+Access modifier
+#####################
+class Outer {
+	class Inner {
+		private def f() { println("f") }
+		class InnerMost {
+			f() // OK
+				}
+}
+(new Inner).f() // Error: f is not accessible
+}
+- A private member is visible only inside the class or object that contains the member definition
+- A protected member is only accessible from subclasses of the class in which the member is
+defined (can be accessed by extension of class)
+
+- public - anywhere (need prefix of the class)
+class Outer {
+class Inner {
+def f() { println("f") }
+class InnerMost {
+f() // OK
+}
+}
+(new Inner).f() // OK because now f() is public
+
+- Can also specify the scope of private (the package it applies to)
+package society {
+	package professional {
+		class Executive {
+			private[professional] var workDetails = null
+			private[society] var friends = null
+			private[this] var secrets = null
+			def help(another : Executive) {
+				println(another.workDetails)
+				println(another.secrets) //ERROR
+######################
+Operators
+######################
+- see println , if ( ) { } , while () {} , do () while ,
+- for (a <- 1 to 10)	<- means generator 
+- See loop with condition and yield
+
+var retVal = for{ var x <- List
+if condition1; if condition2...
+}yield x
+
+val numList = List(1,2,3,4,5,6,7,8,9,10);
+// for loop execution with a yield
+var retVal = for{ a <- numList
+		if a != 3; if a < 8
+		} yield a
+// Now print returned values using another loop.
+for( a <- retVal){
+println( "Value of a: " + a );
+
+###########################
+Functions
+###########################
+
+############################
+Anonymous functions and closures
+#############################
+val multiplier = (i:Int) => i * factor
+
+############################
+String functions
+############################
+
+##############################
+Arrays
+##############################
+- Need to have memory allocated
+var z:Array[String] = new Array[String](3)
+var z = Array("Zara", "Nuha", "Ayan")
+var z = new Array[String](3); z(0)="john";
+
+###############################
+Collections
+###############################
+- List , Set , Map , Tuple , Iterators
+
+##############################
+Traits
+##############################
+- Similar to abstract class in Java - dont give implementation yet
+
+- See Exception handling , extractor , file io , web framework , import java package and calling
+

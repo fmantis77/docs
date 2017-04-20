@@ -1,0 +1,45 @@
+
+###############
+Simple example :
+##############
+<?php
+$a=5;
+$b=10;
+$c=$a+$b;
+print $c;
+?>
+
+php -f sample.php
+
+#################
+Inside html page
+################
+- Will run on server side
+
+
+php -v
+
+simple program :
+<!DOCTYPE html>
+<html>
+<body>
+
+<?php
+echo "My first PHP script!";
+?>
+
+HELLO
+
+</body>
+</html>
+
+
+#####################
+APACHE
+#####################
+Try open page php directly
+
+to embedd in html page :
+in conf/httpd.conf
+AddType application/x-httpd-php .html .ht
+

@@ -1,0 +1,13 @@
+
+
+jscript , onclick - on client - same as <script
+- can also use to validate form before POST
+
+POST - send to cgi , python 
+can also have <?php on client	-> send to server
+
+ant	- standard for compiling java programs , arranging source code
+	- ant -> look for build.xml
+
+
+maven	- Same - more recent - mvn (scan for projects)

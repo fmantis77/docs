@@ -1,0 +1,435 @@
+# http GET / POST with rest  
+# sqlite sample
+# tree view explorer
+# ipython with edit syntax
+# mapred book
+# pandas and arrays
+# generators with filter and map
+# pyspark , pymongo , apache2 / cgi , django rest server
+# swig and jose framework for calling C
+
+# alternate python versions
+# Summary / sample - lambda , files , iterator , generators
+# finish mapred book , pyspark
+
+# python --version
+# Comment , : line break , ; Separate instructions on same line
+
+#######################
+Background
+#######################
+- Rexec - for call external modules / C - sandbox environment - removed sincde 2.6
+- jython - implementation of python on a java JVM
+	from java.util import Random
+	r = random()
+
+###########################################
+Simple Summary commands
+##########################################
+dir(object); repr(object)
+i=[i for x in [1,2,3]
+print('%s, eggs, and %s' % ('spam', 'SPAM!'))
+'{0}, eggs, and {1}'.format('spam', 'SPAM!')
+'That is %d %s bird!' % (1, 'dead')
+lines=[i for i in open("file.txt",'rb')]
+power=[lambda x:x*1,lambda x:x*2,lambda x:x*3];power[1](4)
+dict={"a":1,"b":2};for i in dict:print(i)
+np.array([1,1,1])+np.array([2,2,2])
+sr1=Series([2,5,10,3,14,7,3]); dir(sr1)
+sr1[sr1>sr1.median()]
+sr1[2:].median()
+sr2=pd.Series([3,6,1,7],index=['a','b','c','d']); print(sr2['c':])
+sr3=pd.Series({"john":21,"bill":11})
+data = { 'state': ['ohio','nevada','ohio','nevada'], 'year':[2000,2000,2002,2002], 'pop':[1.2,2.4,1.5,2.8] }
+frame=pd.DataFrame(data,columns=['state','year','pop'],index=['one','two','three','four'])
+print(frame)
+print(frame.ix['two'])
+print(frame[frame.state=='nevada'])
+str=json.dumps(dict); dict2=json.load(str)
+pair=list(filter(lambda x:x % 2 == 0,[1,2,3,4,5,6]))
+mult=list(map(lambda x:x ** 2 , [1,2,3,4,5]))
+
+#################################
+Tools
+#################################
+Debugger : $pdb.py mine.py
+Profiler : cProfile.py
+pydoc - write comments included in """ , then run pydoc on the class
+
+pip freeze	-- list modules
+pip install	-- only for python2 -- need use pip3 for the other
+
+
+###############################
+Blocks and lines , comments
+###############################
+: Start of a block , following lines need to be indented
+str="""		Allow to span on multiple lines
+
+# comment
+"""
+multi line comment
+"""
+
+###################################
+# HOW TO 
+###################################
+display list methods in a module
+import <module>
+dir(module)
+dir(class) help on a class 
+
+a,b,c=range(3)
+a,b,c=p.list()
+a,b,c=[1,2,3]
+'\n'.join(lines)
+
+# Decorators - allow apply generic treatments to functions - see sample
+# can receive argunments as *args , **argl
+
+.python_history	- all command line history - for python 3
+import readline
+for i in range(readline.get_current_history_length()):
+    print readline.get_history_item(i + 1)`:w
+
+
+########################
+Install / uninstall modules , versions
+########################
+sudo pip install pandas
+sudo pip uninstall pandas
+versions : 2.7 / 3.5	- diff syntax , methods - str , range..
+
+use env variables :
+export PYTHONVERBOSE="1"
+
+switch versions - define linux alternatives 
+or change ln
+
+lib install - usr/local/python
+
+###############
+# Variable and types
+#################
+
+S = 'Hello'; print (S[0])   # S[0]='s' illegal - Strings are immutable
+a=1; b=a		    # create object int with value 1 , have 2 reference to it
+a=2;		            # now a point to object 2 , b still point to object 1 - del a - delete object 2
+			    # with list - can have 2 reference to same and get both updates
+
+# S had methods - split , upper , ...
+
+# dir(S)	-- Get help - display all methods
+
+from datetime import date
+dt=datetime(2016,4,24)
+
+################
+# List
+################
+L = [123, 'spam', 1.23]		# Can add , change values ..
+length : len([1,2,3])
+# like arrays
+M = [[1, 2, 3], [4, 5 , 6] , [7,8,9 ] ]
+M[1:]
+a=[i for i in range(0,10,2)]	# 0 start , 10 end , 2 = increment
+				# rangex - dont create - only generator
+
+################
+# Dictionnaries
+################
+list of key : values
+key can be any immutable : scalar , string , tuple - need to be hashable
+value can be any object
+D = {'food': 'Spam', 'quantity': 4, 'color': 'pink'}
+print (D['food'])
+D['Other']=3		# Add element
+
+# Can have nested , value can be other dictionnary , object , list, function...
+
+D = {'a': 1, 'b': 2, 'c': 3}
+Ks = list(D.keys())
+for key in Ks: 
+	print(key, '=>', D[key])
+
+squares = []
+for x in [1, 2, 3, 4, 5]:
+	squares.append(x ** 2)
+
+# Tuples - List that cannot be changed
+T = (1, 2, 3, 4)
+
+######################
+Generator / Iterators
+######################
+dict={"a":1,"b":2}; myiter=iter(dict)
+list(iter)	# built in generator - yielding new values
+def squares(10): for i in range(n): yield i**2
+gen=squares(); for i in gen: print(i)
+
+################
+Other structures
+################
+collection :
+set : collection of unique unordered elements
+array : see numpy
+zip : pair elements of 2 list / tuples in tuples
+frame / serie : see panda
+
+##################
+# Files
+##################
+f = open('data.txt', 'w')
+f.write('Hello\n') # Make a new file in output mode
+# Write strings of bytes to it
+f.write('world\n') # Returns number of bytes written in Python 3.0
+f.close()
+
+# Variables - assign as references to object
+a = 3 ; a = 'a'		# previous object is later garbarge collected
+
+a = 3 ; b = a		# both now point to same 3 object - this one has 2 references
+
+a = 'toto'
+print (b);		# still contain reference to 3
+
+################################
+# If and blocks
+################################
+
+a = 10
+if a > 1:		# indentation of block can be any number of spaces
+  print ('1')
+  print ('2')
+
+#while True:
+#	reply = input('Enter text:')
+#	if reply == 'stop': break
+#	print(reply.upper())
+
+############################
+# Assignments
+###########################
+spam, ham = 'yum', 'YUM'
+a, b, c, d = 'spam'
+
+L = [1, 2, 3, 4]
+while L:
+	front, L = L[0], L[1:]
+	print(front, L)
+
+#############################
+# Print 
+#############################
+a , b , c = '123'; print (a) 		# 1
+print (a,b,c,sep=':',end='\n')
+
+#############################
+# Loops
+#############################
+D = {'a': 1, 'b': 2, 'c': 3}
+for key in D:				# Use iterators
+	print(key, '=>', D[key])
+
+for x in [1, 2, 3, 4]: print(x ** 2, end=' ')
+
+# Work on any iteratable object
+
+# Example on file
+for line in open('data.txt'):
+	print(line.upper(), end='')
+
+# Manual iterator : f.__next__()
+
+#L = [1, 2, 3]
+#I = iter(L)		# obtain iterator
+#I.next()		# Iterate
+
+
+#####################
+# Functions #
+#####################
+
+def times (a,b): return a*b
+
+print (times(2,3))
+print (times('abc',3))			# Polymorphism
+
+X = 1 ; X = 1
+def testf():
+	global Y			# Like namespace - tell we will change a global variable
+	X = 2 ; Y = 2
+
+testf() ; print (X,Y)
+
+# parameters can have default values
+# can pass by order or specify name on call
+# functions are objects
+
+times2 = times; print (times2('bcd',3))
+
+# variable number of parameters
+def sum(*args):
+	for elem in args:
+		print(elem)
+sum(1,2,3,4,5,6,7,8,9)
+
+# arguments are passed by reference
+def amend(a): a.append(4)		-- a will change
+def amend(a): a=a+[4]			-- original will not change as create new object
+
+closure : dynamically created function by another function
+- will continue to have access to namespace of external function - see example hasbeenseen
+
+#####################
+# Lambda - anonymous functions
+#####################
+
+# lambda argument1, argument2,... argumentN :expression using arguments
+f = lambda x, y, z: x + y + z ; print(f(1,2,3))
+times2=lambda x:x*2
+
+# Handy to embedd code function within the code that uses it
+
+L = [lambda x: x ** 2, lambda x: x ** 3, lambda x: x ** 4] # A list of 3 callable functions
+for f in L:
+	print(f(2))
+
+# Function map
+
+mylist = ['1' , '2' , '3' , '4' ]
+print (list(map(lambda x: int(x) **2 , mylist)))
+# map apply the function on all the element of the list
+
+#####################
+# Classes
+#####################
+class C1():
+	def __init__(self, who):
+		self.name = who 	# Set name when constructed
+I1 = C1('bob')
+I2 = C1('mel')
+
+#class C1(C2, C3):		# Inheritance
+##################### 
+# Modules
+#####################
+set PYTHONPATH directory in .bashrc (export PYTHONPATH=~/...)
+Search order : local dir , PYTHONPATH , .pth file , std library
+import mymod as mm
+mm.myfunc	- Call also import only specifics (use from)
+
+#########################
+Decorators
+#########################
+ Decorators - allow apply generic treatments to functions - see sample
+
+def make_pretty(func):
+    def inner():
+        print("I got decorated")
+        func()
+    return inner
+
+def ordinary():
+    print("I am ordinary")
+
+ordinary()
+pretty=make_pretty(ordinary)
+pretty()			-> I got decorated , i am ordinary
+
+Can replace with :
+@make_pretty		-- already defined as above
+def ordinary
+	..		-- normal function definition
+
+Equivalent to ordinary=make_pretty(ordinary)	-- reassign function to itself with the decorator added
+
+########################
+configuration
+#########################
+1 	
+
+import os
+
+for param in os.environ.keys():
+    print "%20s %s" % (param,os.environ[param])
+
+"""
+
+These are the standard Python environment variables ...
+
+PYTHONHOME - Location of standard libraries
+PYTHONPATH - Additions to standard search path for modules
+PYTHONSTARTUP - Interactive mode; commands run before first input is prompted for
+PYTHONY2K - set nonempty to require 4 year date formats
+PYTHONOPTIMIZE - set nonempty causes basic optimisation. Set to 2 also discards docstrings
+PYTHONDEBUG - set nonempty to turn on python debugging
+PYTHONINSPECT - force interactive mode on end of normal program termination
+PYTHONUNBUFFERED - turn OFF buffering of stdin, stdout and stderr
+PYTHONVERBOSE - provide verbose information about module loading (set to 2 for very verbose!)
+PYTHONCASEOK - Ignore case in
+
+Added at Python 2.6
+PYTHONIOENCODING - change unicode handling for stdin / stdout / stderr
+PYTHONNOUSERSITE - don't add user's directory to sys.path
+PYTHONUSERBASE - change the user's directory
+PYTHONEXECUTABLE - Mac OS X Only. Override the program name in argv[0]
+
+##############################
+Json and Serialization , Pickle
+##############################
+Encoding format to serialize / transport / store objects - in document
+From javascript syntax. json is an object with attribute and methods
+module json : load : load json string into an object , dump : dump object to a json string
+dict={"toto":2}
+str=json.dumps(dict); dict2=json.load(str)
+
+json syntax 
+{key:value} with "key"
+	 - number , string , boolean
+         - array [ ]
+         - object { }
+
+Example :
+{"name":"john" , "age":20}
+{'empl': {'name': 'bill', 'age': 23}}
+{"employee":[ {"name":"john" , "age":20}, {"name":"bill" , "age":25} ] }
+
+- Same syntax as javascript
+        var empl=[ {....} , {....} ]
+        empl[0].firstname
+- See when to use envelop or not
+- json.dumps/loads between string/object - filedesc.dump/load - between file and object
+
+- Pickle - byte serialize the object
+
+##############################
+Sqlite3 : in memory database
+##############################
+import sqlite3 as sql
+con=sql.connect(':memory:')
+con.execute("create table essai(a char(10));")
+con.commit()
+# see cursor , see dataframe (rows = cursor.fetchall()
+
+#################################
+Collections
+#################################
+-specialized container datatypes providing alternatives to Python’s general purpose built-in containers, dict, list, set, and tuple.
+namedtuple() 	factory function for creating tuple subclasses with named fields
+deque 	list-like container with fast appends and pops on either end
+ChainMap 	dict-like class for creating a single view of multiple mappings
+Counter 	dict subclass for counting hashable objects
+OrderedDict 	dict subclass that remembers the order entries were added
+defaultdict 	dict subclass that calls a factory function to supply missing values
+UserDict 	wrapper around dictionary objects for easier dict subclassing
+UserList 	wrapper around list objects for easier list subclassing
+UserString 	wrapper around string objects for easier string subclassing
+
+#################################
+Lambda : filter , map , reduce
+#################################
+pair=list(filter(lambda x:x % 2 == 0,[1,2,3,4,5,6]))		-- filter return a generator
+mult=list(map(lambda x:x ** 2 , [1,2,3,4,5]))			-- apply same lambda to all
+-- reduce - removed in since python 3.3
+

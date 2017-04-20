@@ -1,0 +1,22 @@
+map
+---
+- Take stream of data and tokenise (local)
+
+Shuffle
+-------
+
+Reduce
+------
+- Aggregate data from all clusters
+
+python sample :
+---------------
+http://www.michael-noll.com/tutorials/writing-an-hadoop-mapreduce-program-in-python/
+
+pyspark
+-------
+- Need Hadoop clusters , sparks
+http://www.mccarroll.net/blog/pyspark/
+http://spark.apache.org/docs/0.9.0/python-programming-guide.html
+
+

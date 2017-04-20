@@ -1,0 +1,70 @@
+twitter rest api example :
+https://api.twitter.com/1.1/search/tweets.json?q=%23freebandnames&since_id=24012619984051000&max_id=250126199840518145&result_type=mixed&count=4
+https://api.twitter.com/1.1/search/tweets.json?q=python
+- pasting to browser is equivalent to do a GET
+- q : UTF-8 URL encoded search
+- requires authentification
+
+-> Register app dev
+-> See php sample or python
+
+<?php
+session_start();
+require_once("twitteroauth/twitteroauth/twitteroauth.php"); //Path to twitteroauth library
+ 
+$twitteruser = "twitterusername";
+$notweets = 30;
+$consumerkey = "12345";
+$consumersecret = "123456789";
+$accesstoken = "123456789";
+$accesstokensecret = "12345";
+ 
+function getConnectionWithAccessToken($cons_key, $cons_secret, $oauth_token, $oauth_token_secret) {
+  $connection = new TwitterOAuth($cons_key, $cons_secret, $oauth_token, $oauth_token_secret);
+  return $connection;
+}
+ 
+$connection = getConnectionWithAccessToken($consumerkey, $consumersecret, $accesstoken, $accesstokensecret);
+ 
+$tweets = $connection->get("https://api.twitter.com/1.1/statuses/user_timeline.json?screen_name=".$twitteruser."&count=".$notweets);
+ 
+echo json_encode($tweets);
+?>
+
+
+###############################
+Detais
+###############################
+Application Settings
+Your application's Consumer Key and Secret are used to authenticate requests to the Twitter Platform.
+Access level Read and write (modify app permissions)
+Consumer Key (API Key) VZnpUJWJ2FEv4U4j2esikbA88 (manage keys and access tokens)
+Callback URL None
+Callback URL Locked No
+Sign in with Twitter Yes
+App-only authentication https://api.twitter.com/oauth2/token
+Request token URL https://api.twitter.com/oauth/request_token
+Authorize URL https://api.twitter.com/oauth/authorize
+Access token URL https://api.twitter.com/oauth/access_token
+
+Consumer Key (API Key) VZnpUJWJ2FEv4U4j2esikbA88
+Consumer Secret (API Secret) kyjU0DAmlBfcn1ZL2T7lDxz4Zh7D5N4ebmMDzzWbReiLUKCuIU
+Access Level Read and write (modify app permissions)
+Owner fmantis77
+Owner ID 792357464784134144 
+
+
+Access Token 792357464784134144-poxgzaNt6CGFimzeCWOLjDnDB0W1tJn
+Access Token Secret I7g8yHXI8Eiaf0Nyc7B2Os3VglCg0GaJKUE2AJHATSqhY
+Access Level Read and write
+Owner fmantis77
+Owner ID 792357464784134144
+
+
+
+URL: http://flerat.com
+App name : flerat twitter app
+Name : flerat
+
+
+

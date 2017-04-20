@@ -1,0 +1,128 @@
+- e2e rest call / flask - e2e mongodb GET / POST
+- website cookie
+- pyspark sample - n cluster single machine ?
+- undertow / app server
+- mongo bson doc/binData jpeg , gridFS
+- Python pickle
+- cookie on website
+- flask on aws:
+http://www.datasciencebytes.com/bytes/2015/02/24/running-a-flask-app-on-aws-ec2/
+
+
+- IT all.txt , linux arch oreilly , mongodb samples
+- Example http rest calls - using python
+- Scala / Java , Jyphon , Python rexec
+	example DSL - makefile , CSS , html..
+DSL : http://www.javaworld.com/article/2077865/core-java/core-java-creating-dsls-in-java-part-1-what-is-a-domain-specific-language.html?page=2
+- Java training , C sample
+	1) Mongo and samples
+	2) Django samples
+	3) C sample
+	4) Linux architecture
+	5) Java
+
+- closures , DSL - domain specific language , traits
+- Java - interface and abstract , calling java class from scala (import)
+- ubuntu book and arch - 
+- mongodb book - tutorial point
+- django tutorial point
+- spark tutorial point - then python binding
+- cookies / password website
+- e2e rest - mongodb get
+- e2e save twitter mongo
+- pyspark
+- hdfs
+- ether
+- java and jyphon sample programs , c program
+- linux arch , process , virtual memory , threads
+
+
+- Cookie / password on website - tru local first
+- Java - launched from tomcat
+- Ubuntu UG all
+- Java UG - with Intellij
+
+
+
+- Try S3 account / upload
+- freewebsitetemplates.com
+- bluegriffon editor
+- Active presenter
+- private git repositories and try everywhere
+- ufw and remote connection and sockets
+
+- Try AWS / S3 account
+- Try Hadoop storage
+
+
+
+- sheet - basic IT - one doc / concise
+	heap / stack
+	python versions
+	debugging
+	decorator , annotation , lambda
+	map of map , hashmap , protobuf...
+	- why use hashmap
+	sdlc , jenkins , qa
+
+
+
+
+- download AWS pdf docs
+- img orientation
+- S3 website
+- play html video
+- find billing for reserved always up
+- youtube :
+
+ <iframe width="420" height="315"
+src="https://www.youtube.com/embed/XGSy3_Czz8k">
+</iframe> 
+
+- Step / step amz account , bitnami image , S3 object , ubuntu ssh
+- Try DOS USB key and mount
+- Master book file and sort
+	- Languages
+	- OS
+	- Databases
+	- Network
+	- Tools		Docker , Ant , Maven , AWS..
+- Missing books - kafka , zoo keeper , elasticsearch , spark
+- Download time serie , install hadoop hdfs - extract with spark, Wiley pdf and other editions
+ -Python / mysql for lotto 
+
+- main books everywhere
+	- AWS for dummies
+	- Java in a nutshell , other better java book
+	- Linux network administrator
+	- Python ? Linux ? Javascript ?
+	
+- list python modules , install python / mysql
+- create shortcut in ubuntu
+- list all packages and uninstall ?
+- disk space
+
+- my website on aws free offer (ready dummy book)
+- java tutorial all and eclipse  intellij ubuntu
+- pandas like sql joins / python
+- windows or ubuntu - first java program + emulator + install
+- remote connection inside same network with ufw , socket inside same network
+- webservice and rest call , web sockets
+
+
+- local apache webserver / localhost + call cgi / apache
+
+- Try call python from html - change document root
+
+- Open firewall and try vpn
+	howtogeek.com
+
+ -try vpn
+
+- try squid
+
+- try new web site from template
+
+
+
+
